@@ -1,0 +1,114 @@
+/* Reset e variáveis */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --cor-primaria: #7a6bd6;
+  --cor-gradiente: linear-gradient(180deg, #667eea 10%, #764ba2 100%);
+  --cor-gradiente-botao: linear-gradient(90deg, #7a6bd6, #5f4bd8);
+  --sombra-card: 0 10px 25px rgba(0, 0, 0, 0.15);
+  --sombra-habilidade: 0 2px 5px rgba(0, 0, 0, 0.1);
+  --bg-habilidade: rgba(80, 78, 78, 0.075);
+}
+
+/* Body - Fundo */
+body {
+  background: var(--cor-gradiente);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+/* Card principal */
+.card {
+  background-color: #ffffff;
+  width: 320px;
+  padding: 30px 20px;
+  border-radius: 16px;
+  box-shadow: var(--sombra-card);
+  text-align: center;
+}
+
+/* Avatar */
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: var(--cor-primaria);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0 auto 15px;
+}
+
+/* Nome */
+.nome {
+  margin: 5px 0;
+}
+
+/* Cargo */
+.cargo {
+  margin: 0 0 15px;
+  color: var(--cor-primaria);
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Descrição */
+.descricao {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* Título Habilidades */
+.titulo-habilidades {
+  margin-bottom: 10px;
+}
+
+/* Container de habilidades */
+.habilidades {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+/* Tags de habilidade */
+.habilidade {
+  background-color: var(--bg-habilidade);
+  border: 1px solid var(--cor-primaria);
+  color: var(--cor-primaria);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  box-shadow: var(--sombra-habilidade);
+}
+
+/* Botão */
+.botao {
+  background: var(--cor-gradiente-botao);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  width: 100%;
+}
+
+.botao:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  transition: all 0.2s ease;
+}
