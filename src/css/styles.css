@@ -1,59 +1,124 @@
-/* Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 /* =========================
    VARIÁVEIS - MODO CLARO
 ========================= */
 :root {
-  --cor-primaria: #fbbf24; /* amarelo */
+  --cor-primaria: #fbbf24;
+  /* amarelo */
   --cor-botao: linear-gradient(90deg, #fbbf24, #f59e0b);
-  --bg-body: #ffffff;
+  --bg-body: linear-gradient(145deg, #ffffff, #fbbe2461);
   --bg-card: #ffffff;
   --texto-principal: #111827;
   --texto-secundario: #444;
-  --bg-habilidade: rgba(251, 191, 36, 0.1);
-  --sombra-card: 0 10px 25px rgba(0, 0, 0, 0.08);
+  --bg-habilidade: #fbbf241a;
+  --sombra-card: 0 10px 30px rgba(0, 0, 0, 0.286),
+    0 20px 60px rgba(251, 190, 36, 0.337);
+  --borda-card: 0 0 0 1px rgba(0, 0, 0, 0.05);
+
 }
 
 /* =========================
    VARIÁVEIS - MODO ESCURO
 ========================= */
-body.dark-mode {
-  --cor-primaria: #3b82f6; /* azul */
+[data-theme="dark"] {
+  --cor-primaria: #3b82f6;
+  /* azul */
   --cor-botao: linear-gradient(90deg, #3b82f6, #2563eb);
-  --bg-body: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
-  --bg-card: linear-gradient(145deg, #2d3748, #1a202c);
+  --bg-body: linear-gradient(180deg, #000000 0%, #16213e 100%);
+  --bg-card: #00001485;
   --texto-principal: #f7fafc;
   --texto-secundario: #cbd5e0;
-  --bg-habilidade: #ffffff26;
-  --sombra-card: 0 25px 50px rgba(0, 0, 0, 0.4);
+  --bg-habilidade: #629dfb1e;
+  --sombra-card: 0 15px 35px rgba(0, 0, 0, 0.6), 0 25px 70px rgba(22, 33, 62, 0.7);
+  --borda-card: 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+/* ================================
+   BOTÃO DE TEMA (SOL/LUA)
+   ================================ */
+.btn-tema {
+  position: fixed;
+  /* pertence à tela */
+  top: 20px;
+  /* Distância do topo do container */
+  right: 20px;
+  /* Distância da direita do container */
+
+  /* Estilizações de tamanho e cores */
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: var(--bg-card);
+  color: var(--cor-primaria);
+  box-shadow: var(--sombra-card);
+  cursor: pointer;
+
+  /* Centralização do ícone */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+
+  transition: 0.3s;
+}
+
+.btn-tema:hover {
+  transform: scale(1.05);
+}
+
+/* Controla a visibilidade dos ícones de Lua/Sol baseada no tema */
+.btn-tema .bi-moon {
+  opacity: 0;
+  /* lua escondida */
+  position: absolute;
+}
+
+[data-theme="dark"] .btn-tema .bi-moon {
+  opacity: 1;
+  /* mostra lua */
+}
+
+.btn-tema .bi-brightness-high {
+  opacity: 1;
+  /* Sol oculto por padrão */
+  position: absolute;
+}
+
+[data-theme="dark"] .btn-tema .bi-brightness-high {
+  opacity: 0;
+  /* esconde sol */
 }
 
 /* Body */
 body {
-  background: var(--bg-body);
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Arial, sans-serif;
-  transition: all 0.4s ease;
+
+  background: var(--bg-body);
+  color: var(--texto-principal);
+
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
 /* Card */
 .card {
   position: relative;
+  /* essencial pro botão absoluto */
   background: var(--bg-card);
+  display: flex;
+  flex-direction: column;
+  /* importante */
+  align-items: center;
   width: 320px;
-  padding: 30px 20px;
+  /* define largura real */
+  padding: 40px 25px 30px;
   border-radius: 16px;
-  box-shadow: var(--sombra-card);
+  box-shadow: var(--sombra-card), var(--borda-card);  
   text-align: center;
-  transition: all 0.4s ease;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 /* Avatar */
@@ -68,21 +133,22 @@ body {
   justify-content: center;
   font-size: 28px;
   font-weight: bold;
-  margin: 0 auto 15px;
+  margin: 0 0 -15px;
 }
 
 /* Nome */
 .nome {
   margin: 5px 0;
   color: var(--texto-principal);
+  margin-bottom: -25px;
 }
 
 /* Cargo */
 .cargo {
-  margin: 0 0 15px;
   color: var(--cor-primaria);
   font-weight: bold;
   font-size: 14px;
+  margin-bottom: -5px;
 }
 
 /* Descrição */
@@ -90,34 +156,54 @@ body {
   font-size: 13px;
   color: var(--texto-secundario);
   line-height: 1.5;
-  margin-bottom: 20px;
+  padding: 0 10px;
 }
 
-/* Habilidades */
-.habilidades {
+/* <h3> Título Habilidades */
+.titulo-habilidades {
+  font-size: 16px;
+  color: var(--texto-principal);
+  margin-bottom: -25px;
+  letter-spacing: 1px;
+}
+
+/* <ul> listaHabilidades */
+.listaHabilidades {
+  list-style: none;
   display: flex;
   flex-wrap: wrap;
+  /* Empilha as habilidades se não couberem na linha */
   justify-content: center;
   gap: 8px;
-  margin-bottom: 20px;
+  width: 100%;
+  padding: 4px;
+  cursor: default;
 }
 
-.habilidade {
+/* <li> listaHabilidades */
+.listaHabilidades li {
   background: var(--bg-habilidade);
   border: 1px solid var(--cor-primaria);
   color: var(--cor-primaria);
   padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-color: white;
+  border-radius: 50px;
+  font-weight: normal;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  transition: 0.2s;
+}
+
+.listaHabilidades li:hover {
+  background: var(--cor-primaria);
+  color: white;
 }
 
 /* Botão principal */
 .botao {
   background: var(--cor-botao);
-  color: white;
+  color: var(--texto-principal);
   border: none;
-  padding: 10px 20px;
+  padding: 12px 20px;
   border-radius: 25px;
   cursor: pointer;
   font-size: 14px;
@@ -126,61 +212,6 @@ color: white;
 }
 
 .botao:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
-}
-
-/* Botão Dark Mode */
-.btn-modoescuro {
-  position: absolute;
-  top: 18px;
-  left: 18px;
-  width: 50px;
-  height: 50px;
-  border: none;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(15px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  transition: all 0.4s ease;
-}
-
-.btn-modoescuro svg {
-  width: 22px;
-  height: 22px;
-  transition: all 0.4s ease;
-}
-
-.icon-sun {
-  color: #fbbf24;
-}
-
-.icon-moon {
-  color: #3b82f6;
-  opacity: 0;
-  transform: scale(0.8) rotate(180deg);
-}
-
-/* Ícones alternando */
-.light-mode .icon-sun {
-  opacity: 1;
-  transform: scale(1) rotate(0deg);
-}
-
-.light-mode .icon-moon {
-  opacity: 0;
-}
-
-.dark-mode .icon-sun {
-  opacity: 0;
-  transform: scale(0.8) rotate(-180deg);
-}
-
-.dark-mode .icon-moon {
-  opacity: 1;
-  transform: scale(1) rotate(0deg);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
 }
