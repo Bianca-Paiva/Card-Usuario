@@ -1,157 +1,197 @@
 /* =========================
-   VARIÁVEIS - MODO CLARO
+   VARIÁVEIS GLOBAIS - MODO CLARO
+   Define as cores e estilos padrão do site
 ========================= */
 :root {
-  --cor-primaria: #fbbf24;
-  /* amarelo */
-  --cor-botao: linear-gradient(90deg, #fbbf24, #f59e0b);
-  --bg-body: linear-gradient(145deg, #ffffff, #fbbe2461);
-  --bg-card: #ffffff;
-  --texto-principal: #111827;
-  --texto-secundario: #444;
-  --bg-habilidade: #fbbf241a;
-  --sombra-card: 0 10px 30px rgba(0, 0, 0, 0.286),
-    0 20px 60px rgba(251, 190, 36, 0.337);
-  --borda-card: 0 0 0 1px rgba(0, 0, 0, 0.05);
+  --cor-primaria: #fbbf24; /* Cor principal do tema (amarelo) */
 
+  --cor-botao: linear-gradient(90deg, #fbbf24, #f59e0b); /* Gradiente usado nos botões principais */
+
+  --bg-body: linear-gradient(145deg, #ffffff, #fbbe2461); /* Fundo geral da página */
+
+  --bg-card: #ffffff; /* Fundo do card */
+
+  --texto-principal: #111827; /* Cor principal dos textos */
+
+  --texto-secundario: #444; /* Cor para textos menos importantes */
+
+  --bg-habilidade: #fbbf241a; /* Fundo das tags de habilidades */
+
+  --sombra-card: 0 10px 30px rgba(0, 0, 0, 0.286),
+    0 20px 60px rgba(251, 190, 36, 0.337); /* Sombra aplicada no card */
+
+  --borda-card: 0 0 0 1px rgba(0, 0, 0, 0.05); /* Borda sutil do card */
 }
 
 /* =========================
    VARIÁVEIS - MODO ESCURO
+   Sobrescreve as cores quando data-theme="dark"
 ========================= */
 [data-theme="dark"] {
-  --cor-primaria: #3b82f6;
-  /* azul */
-  --cor-botao: linear-gradient(90deg, #3b82f6, #2563eb);
-  --bg-body: linear-gradient(180deg, #000000 0%, #16213e 100%);
-  --bg-card: #00001485;
-  --texto-principal: #f7fafc;
-  --texto-secundario: #cbd5e0;
-  --bg-habilidade: #629dfb1e;
-  --sombra-card: 0 15px 35px rgba(0, 0, 0, 0.6), 0 25px 70px rgba(22, 33, 62, 0.7);
-  --borda-card: 0 0 0 1px rgba(255, 255, 255, 0.04);
+  --cor-primaria: #3b82f6;  /* Cor principal muda para azul */
+
+  --cor-botao: linear-gradient(90deg, #3b82f6, #2563eb); /* Novo gradiente para botões */
+
+  --bg-body: linear-gradient(180deg, #000000 0%, #16213e 100%); /* Fundo escuro da página */
+
+  --bg-card: #00001485; /* Fundo do card mais escuro */
+
+  --texto-principal: #f7fafc; /* Texto principal claro */
+
+  --texto-secundario: #cbd5e0; /* Texto secundário mais suave */
+
+  --bg-habilidade: #629dfb1e; /* Fundo das habilidades adaptado ao azul */
+
+  --sombra-card: 0 15px 35px rgba(0, 0, 0, 0.6), 
+                 0 25px 70px rgba(22, 33, 62, 0.7); /* Sombra mais intensa para fundo escuro */
+
+  --borda-card: 0 0 0 1px rgba(255, 255, 255, 0.04); /* Borda clara e discreta */
 }
 
 /* ================================
-   BOTÃO DE TEMA (SOL/LUA)
-   ================================ */
+   BOTÃO DE TROCA DE TEMA (SOL/LUA)
+   Botão fixado no canto superior do card
+================================ */
 .btn-tema {
-  position: fixed;
-  /* pertence à tela */
-  top: 20px;
-  /* Distância do topo do container */
-  right: 20px;
-  /* Distância da direita do container */
+  position: absolute; /* Remove do fluxo normal e posiciona manualmente */
 
-  /* Estilizações de tamanho e cores */
-  width: 48px;
-  height: 48px;
-  border: none;
-  border-radius: 50%;
-  background: var(--bg-card);
-  color: var(--cor-primaria);
-  box-shadow: var(--sombra-card);
-  cursor: pointer;
+  top: 20px; /* Distância do topo do card */
+  right: 20px; /* Distância da direita do card */
 
-  /* Centralização do ícone */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
+  width: 48px; /* Largura do botão */
+  height: 48px; /* Altura do botão */
 
-  transition: 0.3s;
+  border: none; /* Remove borda padrão */
+  border-radius: 50%; /* Deixa o botão redondo */
+
+  background: var(--bg-card); /* Usa a cor de fundo do card */
+  color: var(--cor-primaria); /* Cor do ícone */
+  box-shadow: var(--sombra-card); /* Aplica sombra */
+
+  cursor: pointer; /* Cursor vira mãozinha */
+
+  /* Centralização do ícone dentro do botão */
+  display: flex; /* Ativa flexbox (container flexível) */
+  align-items: center; /* Centraliza verticalmente */
+  justify-content: center; /* Centraliza horizontalmente */
+  z-index: 1000; /* Garante que o botão fique acima dos outros elementos */
+
+  transition: 0.3s; /* Suaviza animações */
 }
 
 .btn-tema:hover {
-  transform: scale(1.05);
+  transform: scale(1.05); /* Aumenta levemente no hover (quando o mouse está em cima)*/
 }
 
-/* Controla a visibilidade dos ícones de Lua/Sol baseada no tema */
+/* =========================
+   CONTROLE DE VISIBILIDADE DOS ÍCONES
+   Alterna entre sol e lua
+========================= */
+
 .btn-tema .bi-moon {
-  opacity: 0;
-  /* lua escondida */
-  position: absolute;
+  opacity: 0; /* Lua começa escondida */
+  position: absolute; /* Fica sobreposto ao sol */
 }
 
 [data-theme="dark"] .btn-tema .bi-moon {
-  opacity: 1;
-  /* mostra lua */
+  opacity: 1; /* Mostra lua no modo escuro */
 }
 
 .btn-tema .bi-brightness-high {
-  opacity: 1;
-  /* Sol oculto por padrão */
+  opacity: 1; /* Sol visível por padrão */
   position: absolute;
 }
 
 [data-theme="dark"] .btn-tema .bi-brightness-high {
-  opacity: 0;
-  /* esconde sol */
+  opacity: 0; /* Esconde sol no modo escuro */
 }
 
-/* Body */
+/* =========================
+   BODY - Centralização geral da página
+========================= */
 body {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 0; /* Remove margem padrão */
 
-  background: var(--bg-body);
-  color: var(--texto-principal);
+  min-height: 100vh; /* Altura mínima igual à tela inteira */
 
-  transition: background 0.4s ease, color 0.4s ease;
+  display: flex; /* Ativa flexbox (container flexível.) */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  padding: 80px; /* Respiro lateral para telas pequenas */
+
+  background: var(--bg-body); /* Fundo dinâmico */
+  color: var(--texto-principal); /* Cor principal do texto */
+
+  transition: background 0.4s ease, color 0.4s ease; /* Transição suave entre temas */
 }
 
-/* Card */
+/* =========================
+   CARD PRINCIPAL
+   Container das informações
+========================= */
 .card {
-  position: relative;
-  /* essencial pro botão absoluto */
-  background: var(--bg-card);
-  display: flex;
-  flex-direction: column;
-  /* importante */
-  align-items: center;
-  width: 320px;
-  /* define largura real */
-  padding: 40px 25px 30px;
-  border-radius: 16px;
-  box-shadow: var(--sombra-card), var(--borda-card);  
-  text-align: center;
-  transform-style: preserve-3d;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  position: relative; /* Necessário para o botão absoluto funcionar */
+
+  background: var(--bg-card); /* Fundo dinâmico */
+
+  display: flex; /* Ativa flexbox (container flexível.) */
+  flex-direction: column; /* Organiza os elementos em coluna */
+  align-items: center; /* Centraliza horizontalmente */
+
+  width: 100%;
+  max-width: 380px; /* Limita tamanho máximo */
+
+  margin: 20px; /* Espaçamento externo */
+  gap: 12px; /* Espaçamento vertical entre elementos */
+  padding: 30px 20px; /* Espaçamento interno */
+
+  border-radius: 16px; /* Bordas arredondadas */
+
+  box-shadow: var(--sombra-card), var(--borda-card); /* Aplica sombra e borda */
+
+  text-align: center; /* Centraliza textos */
+
+  transform-style: preserve-3d; /* Permite efeitos 3D */
+  transition: transform 0.4s ease, box-shadow 0.4s ease; /* Suaviza animações */
 }
 
-/* Avatar */
+/* =========================
+   AVATAR (Foto/Inicial)
+========================= */
 .avatar {
   width: 80px;
   height: 80px;
-  border-radius: 50%;
-  background: var(--cor-primaria);
-  color: white;
+  border-radius: 50%; /* Forma circular */
+
+  background: var(--cor-primaria); /* Fundo com cor principal */
+
+  color: white; 
+
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; /* Centraliza letra/ícone */
+
   font-size: 28px;
   font-weight: bold;
-  margin: 0 0 -15px;
+
+  margin: 0 0 -15px; /* Ajuste fino de posicionamento */
 }
 
-/* Nome */
+/* Nome principal */
 .nome {
-  margin: 5px 0;
+  margin: 0;
   color: var(--texto-principal);
-  margin-bottom: -25px;
 }
 
-/* Cargo */
+/* Cargo/profissão */
 .cargo {
   color: var(--cor-primaria);
   font-weight: bold;
   font-size: 14px;
-  margin-bottom: -5px;
+  margin: 0;
 }
 
-/* Descrição */
+/* Texto descritivo */
 .descricao {
   font-size: 13px;
   color: var(--texto-secundario);
@@ -159,59 +199,83 @@ body {
   padding: 0 10px;
 }
 
-/* <h3> Título Habilidades */
+/* =========================
+   HABILIDADES
+========================= */
+
+/* Título */
 .titulo-habilidades {
   font-size: 16px;
   color: var(--texto-principal);
-  margin-bottom: -25px;
   letter-spacing: 1px;
 }
 
-/* <ul> listaHabilidades */
+/* Lista */
 .listaHabilidades {
-  list-style: none;
+  list-style: none; /* Remove bolinhas */
+
   display: flex;
-  flex-wrap: wrap;
-  /* Empilha as habilidades se não couberem na linha */
-  justify-content: center;
-  gap: 8px;
+  justify-content: center; /* Centraliza itens */
+
+  flex-wrap: wrap; /* Quebra linha se necessário */
+
+  gap: 8px; /* Espaçamento entre habilidades */
+
   width: 100%;
   padding: 4px;
+
   cursor: default;
 }
 
-/* <li> listaHabilidades */
+/* Cada habilidade */
 .listaHabilidades li {
   background: var(--bg-habilidade);
   border: 1px solid var(--cor-primaria);
   color: var(--cor-primaria);
+
   padding: 6px 12px;
-  border-radius: 50px;
-  font-weight: normal;
+  border-radius: 50px; /* Formato de tag */
+
   font-size: 0.85rem;
-  white-space: nowrap;
+  white-space: nowrap; /* Impede quebra de linha */
+
   transition: 0.2s;
 }
 
+/* Efeito hover nas habilidades */
 .listaHabilidades li:hover {
   background: var(--cor-primaria);
   color: white;
 }
 
-/* Botão principal */
+/* =========================
+   BOTÃO PRINCIPAL
+========================= */
 .botao {
-  background: var(--cor-botao);
+  background: var(--cor-botao); /* Gradiente */
+
   color: var(--texto-principal);
+
   border: none;
   padding: 12px 20px;
-  border-radius: 25px;
+
+  border-radius: 25px; /* Bordas arredondadas */
+
   cursor: pointer;
+
   font-size: 14px;
   width: 100%;
+
   transition: all 0.2s ease;
 }
 
 .botao:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px); /* Sobe levemente */
+
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); /* Adiciona profundidade */
+}
+
+/* Remove rolagem horizontal indesejada */
+html, body {
+  overflow-x: hidden;
 }

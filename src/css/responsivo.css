@@ -1,8 +1,57 @@
-@media (max-width: 900px) {
-    .card {
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
-        padding-top: 100px;
-    }
+/* =========================
+   RESPONSIVIDADE - TELAS ATÉ 768px (Tablet)
+   Ajusta espaçamento interno do card
+========================= */
+@media (min-width: 768px) {
+  .card {
+    gap: 24px; 
+    /* Aumenta o espaçamento vertical entre os elementos internos */
+  }
+}
+
+/* =========================
+   RESPONSIVIDADE - TELAS A PARTIR DE 1024px (Desktop)
+   Melhora proporções em telas maiores
+========================= */
+@media (min-width: 1024px) {
+
+  .card {
+    max-width: 460px; 
+    /* Permite que o card fique mais largo */
+
+    padding: 50px 35px 40px; 
+    /* Aumenta o espaçamento interno 
+       (mais respiro visual em telas grandes) */
+  }
+
+  .avatar {
+    width: 100px; 
+    height: 100px; 
+    /* Aumenta o tamanho da foto/ícone */
+
+    font-size: 32px; 
+    /* Aumenta o tamanho da letra dentro do avatar */
+  }
+
+  .nome {
+    font-size: 1.6rem; 
+    /* Nome fica maior para melhor destaque */
+  }
+
+  .descricao {
+    font-size: 14px; 
+    /* Texto levemente maior para melhor leitura em desktop */
+  }
+}
+
+/* =========================
+   RESPONSIVIDADE - TELAS MUITO GRANDES (1440px+)
+   Ajuste fino para monitores grandes
+========================= */
+@media (min-width: 1440px) {
+  .card {
+    max-width: 500px; 
+    /* Permite que o card use um pouco mais de espaço 
+       sem ficar exageradamente largo */
+  }
 }
